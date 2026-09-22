@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "233834005032",
+    "project_id": "bake-hub-69e00",
+    "storage_bucket": "bake-hub-69e00.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233834005032:android:4c9df8e90a99ec582ceb1d",
+        "android_client_info": {
+          "package_name": "com.bakehub.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9FnGF83hCKt_wHqg7Hb_pGclsbaunX3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
