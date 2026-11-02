@@ -43,7 +43,9 @@ data class Recipe(
     val ratingCount: Int,
     val nutrition: Nutrition,
     val ingredients: List<Ingredient>,
-    val steps: List<RecipeStep>
+    val steps: List<RecipeStep>,
+    val sourceUrl: String? = null,
+    val imageUrl: String? = null
 ) {
     val totalTimeMinutes: Int get() = prepTimeMinutes + cookTimeMinutes
 }

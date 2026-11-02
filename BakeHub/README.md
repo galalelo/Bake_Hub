@@ -3,7 +3,7 @@ YOUTUBE LINK-https://youtube.com/shorts/WX5nSKwMGOk?feature=share
 GITHUB LINK-https://github.com/galalelo/Bake_Hub.git
 
 
-# BakeHub — Android Prototype (Kotlin + Jetpack Compose)
+# BakeHub — Firebase Android App (Kotlin + XML)
 
 This is the clickable prototype referenced as **Milestone M3** in the BakeHub
 project plan ("Prototype (frontend) complete — all ten screens built and
@@ -15,7 +15,7 @@ wireframes and app icon, wired together with Navigation Compose.
 
 - **Onboarding → Login → Home** flow
 - **Home** — greeting, streak/level snapshot, weekly challenge, recommended recipes
-- **Search & Filter** — live text search over the mock recipe list, filter chips (UI only)
+- **Search & Filter** — live text search over Firestore recipes plus the secured external recipe search function
 - **Recipe Detail** — full recipe info, Metric/Imperial toggle, Save-to-Recipe-Box
 - **Bake Mode** — step-by-step guided flow with a real countdown timer and
   `FLAG_KEEP_SCREEN_ON` so the screen won't lock mid-bake, matching Section 2.1.4
@@ -44,8 +44,7 @@ Weekly Challenge card, and the Grocery List.
 
 ## Firebase setup
 
-The app will not build until you connect it to your own Firebase project —
-`google-services.json` is deliberately not included in this download.
+The app requires a Firebase project. This working copy includes `google-services.json`; replace it with your own project configuration before publishing.
 
 1. **Create a Firebase project.** Go to
    [console.firebase.google.com](https://console.firebase.google.com) → *Add
@@ -57,7 +56,7 @@ The app will not build until you connect it to your own Firebase project —
    - (Nickname/SHA-1 are optional for this prototype — SHA-1 is only needed
      later if you add Google Sign-In.)
 3. **Download `google-services.json`** and place it at
-   `BakeHubApp/app/google-services.json` — directly next to
+   `BakeHub/app/google-services.json` — directly next to
    `app/build.gradle.kts`. (Delete the
    `google-services.json.PLACEHOLDER-README.txt` file once you've done this.)
 4. **Enable Email/Password sign-in.** In the Firebase console: *Build →
@@ -118,16 +117,43 @@ this — no physical device is required to test the Firebase wiring.
   in the rules once you want to restrict editing to the recipe's author.
 
 ## Project structure
+```text
+BakeHub/
+├─ app/src/main/java/com/bakehub/app/
+│  ├─ MainActivity.kt
+│  └─ data/                 # Firebase Auth, Firestore, models and mappers
+├─ app/src/main/res/layout/ # XML screen layouts
+├─ functions/               # Secure external recipe search proxy
+├─ firestore.rules
+└─ .github/workflows/android.yml
+```
+## Part 3 Firebase + XML implementation
 
+This version uses Firebase as the source of truth. The Android UI has been migrated from Jetpack Compose to Kotlin and XML layouts while retaining Firebase Authentication and Cloud Firestore repositories.
+
+### Firebase features implemented in the Android app
+
+- Email/password sign-up and login through Firebase Authentication.
+- Firestore-backed user profiles, saved recipes, and live recipe listeners.
+- Firestore recipe seeding on a fresh project.
+- XML screens for onboarding, login, sign-up, home, search, recipe box, grocery list, profile, settings, recipe detail, create recipe, and Bake Mode.
+- Offline-friendly fallback to the bundled sample recipes when Firestore has not loaded yet.
+- External recipe attribution fields (`sourceUrl` and `imageUrl`) in the Firestore recipe model.
+
+### Secure live recipe search
+
+The `functions/` directory contains a Firebase Cloud Function named `searchExternalRecipes`. It calls Spoonacular from the server so the provider API key is not placed in the Android APK. The Android app calls the function through the Firebase Functions SDK and combines online results with Firestore results.
+
+From the Firebase project root:
+
+```bash
+cd functions
+npm install
+cd ..
+firebase functions:secrets:set SPOONACULAR_API_KEY
+firebase deploy --only functions:searchExternalRecipes,firestore:rules
 ```
-app/src/main/java/com/bakehub/app/
-├─ MainActivity.kt
-├─ data/            Models.kt, MockData.kt, FirestoreMappers.kt,
-│                    AuthRepository.kt, RecipeRepository.kt, UserRepository.kt
-│                    firebase/FirebaseClients.kt
-└─ ui/
-   ├─ theme/        Color.kt, Type.kt, Theme.kt
-   ├─ components/   BottomNavBar.kt, RecipeCard.kt
-   ├─ navigation/    Screen.kt, NavGraph.kt
-   └─ screens/       one file per screen (10 screens + Settings)
-```
+
+Enable Email/Password in Firebase Authentication, create the Firestore database, and confirm that the Android package name matches the package in `google-services.json`. Online results should always retain the original source link and provider attribution. Do not copy or redistribute full third-party instructions unless the provider licence permits it.
+
+The Cloud Function uses the Spoonacular `complexSearch` endpoint. Its quota and licensing rules apply; configure billing/quotas in the provider account before public release.

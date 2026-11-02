@@ -29,6 +29,8 @@ fun Recipe.toFirestoreMap(): Map<String, Any?> = mapOf(
     "ingredients" to ingredients.map {
         mapOf("name" to it.name, "quantity" to it.quantity, "unit" to it.unit)
     },
+    "sourceUrl" to sourceUrl,
+    "imageUrl" to imageUrl,
     "steps" to steps.map {
         mapOf(
             "stepNumber" to it.stepNumber,
@@ -50,6 +52,8 @@ fun DocumentSnapshot.toRecipe(): Recipe? {
             title = getString("title") ?: return null,
             authorName = getString("authorName") ?: "Unknown",
             source = getString("source") ?: "BakeHub",
+            sourceUrl = getString("sourceUrl"),
+            imageUrl = getString("imageUrl"),
             category = getString("category") ?: "Other",
             difficulty = runCatching { Difficulty.valueOf(getString("difficulty") ?: "EASY") }
                 .getOrDefault(Difficulty.EASY),
