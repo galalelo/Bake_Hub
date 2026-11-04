@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "233834005032",
+    "project_id": "bake-hub-69e00",
+    "storage_bucket": "bake-hub-69e00.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233834005032:android:4c9df8e90a99ec582ceb1d",
+        "android_client_info": {
+          "package_name": "com.bakehub.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233834005032-qqvqhg9dduu970536q3ekig9i7bqg19m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bakehub.app",
+            "certificate_hash": "08a84098fa890682038db7c18842dd8e7feb813e"
+          }
+        },
+        {
+          "client_id": "233834005032-mm39hucut7p2kdgm5hnm7l0ic55s8hpb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9FnGF83hCKt_wHqg7Hb_pGclsbaunX3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233834005032-mm39hucut7p2kdgm5hnm7l0ic55s8hpb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

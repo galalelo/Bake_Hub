@@ -1,0 +1,16 @@
+{
+  "name": "bakehub-functions",
+  "private": true,
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^6.1.0"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check index.js && node --check lib/notifications.js"
+  }
+}

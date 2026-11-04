@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_home">⌂\nInicio</string>
+    <string name="nav_search">⌕\nBuscar</string>
+    <string name="nav_box">☷\nCaja</string>
+    <string name="nav_grocery">🛒\nCompras</string>
+    <string name="nav_profile">♙\nPerfil</string>
+
+    <string name="offline_banner">Sin conexión. Los cambios se sincronizarán cuando vuelvas a conectarte.</string>
+
+    <string name="tagline">Hornea mejor, juntos.</string>
+    <string name="get_started">Empezar</string>
+    <string name="have_account">Ya tengo una cuenta</string>
+    <string name="welcome_back">Te damos la bienvenida</string>
+    <string name="login_subtitle">Inicia sesión para seguir horneando</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="log_in">Iniciar sesión</string>
+    <string name="continue_google">Continuar con Google</string>
+    <string name="new_here">¿Eres nuevo? Crea una cuenta</string>
+    <string name="login_failed">Error al iniciar sesión</string>
+    <string name="google_not_configured">El acceso con Google aún no está configurado en esta versión. Usa tu correo y contraseña.</string>
+    <string name="google_no_account">No se encontró ninguna cuenta de Google en este dispositivo. Añade una en los ajustes de Android e inténtalo de nuevo.</string>
+    <string name="google_failed">Error al iniciar sesión con Google</string>
+    <string name="back_button">‹ Atrás</string>
+    <string name="create_account_title">Crea tu cuenta</string>
+    <string name="display_name_hint">Nombre para mostrar</string>
+    <string name="password_hint_new">Contraseña (mín. 6 caracteres)</string>
+    <string name="create_account">Crear cuenta</string>
+    <string name="signup_failed">Error al registrarse</string>
+
+    <string name="hello_user">Hola, %1$s</string>
+    <string name="streak_level">🔥 Racha de %1$d días · Nv. %2$d</string>
+    <string name="search_hint">Buscar recetas, ingredientes…</string>
+    <string name="recommended">Recomendado para ti</string>
+    <string name="discover_new">Descubre algo nuevo</string>
+    <string name="community">De la comunidad BakeHub</string>
+
+    <string name="recipes_from_firestore">%1$d recetas de Firestore</string>
+    <string name="saved_in_firebase">Guardada en Firebase</string>
+    <string name="searching_online">Buscando recetas en línea…</string>
+    <string name="recipes_firestore_online">%1$d recetas · Firestore + en línea</string>
+    <string name="online_attribution">En línea · enlace de código abierto para atribución</string>
+    <string name="search_offline_notice">Sin conexión: no hay resultados en línea. Se muestran solo las recetas guardadas.</string>
+
+    <string name="recipe_box_title">Mi caja de recetas</string>
+    <string name="saved_count_sync">%1$d guardadas · sincronización con Firebase Firestore</string>
+    <string name="new_recipe_link">+ Nueva receta</string>
+    <string name="no_saved">Aún no has guardado ninguna receta.</string>
+    <string name="saved_in_box">Guardada en la caja de recetas</string>
+    <string name="loading_online">Cargando tus recetas en línea...</string>
+    <string name="saved_from_mealdb">Guardada desde TheMealDB</string>
+    <string name="load_saved_failed">No se pudieron cargar tus recetas guardadas. Inténtalo de nuevo.</string>
+    <string name="no_saved_displayable">No se pudo mostrar ninguna receta guardada.</string>
+
+    <string name="grocery_title">Lista de esta semana</string>
+    <string name="grocery_subtitle">Tu lista de la compra</string>
+    <string name="grocery_empty">Tu lista de la compra está vacía.</string>
+    <string name="err_update_item">No se pudo actualizar el artículo: %1$s</string>
+    <string name="edit">Editar</string>
+    <string name="item_name">Nombre del artículo</string>
+    <string name="quantity">Cantidad</string>
+    <string name="edit_grocery_item">Editar artículo</string>
+    <string name="save">Guardar</string>
+    <string name="err_edit_item">No se pudo editar el artículo: %1$s</string>
+    <string name="enter_both_fields">Completa ambos campos.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete_grocery_item">Eliminar artículo</string>
+    <string name="confirm_delete_item">¿Seguro que quieres eliminar %1$s?</string>
+    <string name="delete">Eliminar</string>
+    <string name="err_delete_item">No se pudo eliminar el artículo: %1$s</string>
+    <string name="add_grocery_button">+ Añadir artículo</string>
+    <string name="quantity_example">Cantidad (p. ej. 2 tazas)</string>
+    <string name="add_grocery_title">Añadir artículo</string>
+    <string name="add">Añadir</string>
+    <string name="err_add_item">No se pudo añadir el artículo: %1$s</string>
+    <string name="share_list">Compartir lista</string>
+    <string name="grocery_share_header">Lista de la compra de BakeHub</string>
+    <string name="share_chooser_title">Compartir lista de la compra</string>
+
+    <string name="profile_level_xp">Nivel %1$d · %2$d XP</string>
+    <string name="profile_streak">🔥 Racha actual: %1$d días</string>
+    <string name="badges">Insignias</string>
+    <string name="profile_stats">%1$d horneados completados · %2$d recetas compartidas</string>
+    <string name="settings_button">⚙ Ajustes</string>
+
+    <string name="new_recipe_title">Nueva receta</string>
+    <string name="recipe_title_hint">Título de la receta</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="ingredient_example">p. ej. 2 tazas de harina</string>
+    <string name="steps">Pasos</string>
+    <string name="first_step_hint">Describe el primer paso</string>
+    <string name="publish_recipe">Publicar receta</string>
+    <string name="untitled_recipe">Receta sin título</string>
+    <string name="err_publish">No se pudo publicar</string>
+
+    <string name="settings_title">Ajustes</string>
+    <string name="imperial_units">Unidades imperiales</string>
+    <string name="notifications_toggle">Notificaciones de nuevas recetas</string>
+    <string name="language_button">🌐 Idioma: %1$s</string>
+    <string name="language_title">Elegir idioma</string>
+    <string name="language_system">Predeterminado del sistema</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="log_out">Cerrar sesión</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="delete_account_title">¿Eliminar tu cuenta?</string>
+    <string name="delete_account_message">Se eliminarán de forma permanente tu perfil, tus recetas guardadas, tu lista de la compra y las recetas que publicaste. Esta acción no se puede deshacer.</string>
+    <string name="reauth_title">Confirma tu contraseña para eliminar tu cuenta</string>
+    <string name="account_deleted">Tu cuenta ha sido eliminada.</string>
+    <string name="err_delete_account">No se pudo eliminar la cuenta: %1$s</string>
+    <string name="err_needs_internet">Se necesita conexión a internet.</string>
+
+    <string name="detail_info_full">%1$s · %2$s · ★ %3$s · %4$d min · %5$d porciones</string>
+    <string name="detail_info_short">%1$s · ★ %2$s · %3$d min · %4$d porciones</string>
+    <string name="row_info">%1$s · ★ %2$s · %3$d min</string>
+    <string name="no_ingredients">No hay información de ingredientes.</string>
+    <string name="instructions">Instrucciones</string>
+    <string name="step_number">Paso %1$d</string>
+    <string name="start_bake">Iniciar modo horneado ▶</string>
+    <string name="saved_to_box">★ Guardada en la caja de recetas</string>
+    <string name="save_to_box">☆ Guardar en la caja de recetas</string>
+    <string name="view_original">Ver receta original</string>
+    <string name="report_recipe">⚑ Denunciar esta receta</string>
+    <string name="report_dialog_title">¿Por qué denuncias esta receta?</string>
+    <string name="report_reason_offensive">Inapropiada u ofensiva</string>
+    <string name="report_reason_spam">Spam o engañosa</string>
+    <string name="report_reason_copyright">Problema de derechos de autor</string>
+    <string name="report_reason_other">Otro motivo</string>
+    <string name="report_sent">Gracias: tu denuncia ha sido enviada.</string>
+    <string name="report_failed">No se pudo enviar la denuncia.</string>
+
+    <string name="bake_start">▶ Iniciar</string>
+    <string name="bake_resume">▶ Reanudar</string>
+    <string name="bake_pause">Ⅱ Pausar</string>
+    <string name="bake_reset">↻ Reiniciar</string>
+    <string name="bake_back">◀ Atrás</string>
+    <string name="bake_exit">Salir</string>
+    <string name="bake_next">Siguiente ▶</string>
+    <string name="bake_finish">Terminar ✓</string>
+    <string name="bake_step_of">Paso %1$d de %2$d</string>
+    <string name="timer_finished">¡Temporizador terminado!</string>
+
+    <string name="channel_new_recipes_name">Nuevas recetas</string>
+    <string name="channel_new_recipes_desc">Avisos cuando alguien publica una receta nueva en la comunidad BakeHub.</string>
+    <string name="channel_timers_name">Temporizadores de horneado</string>
+    <string name="channel_timers_desc">Avisos cuando termina el temporizador de un paso del modo horneado.</string>
+    <string name="notif_new_recipe_title">Nueva receta en BakeHub</string>
+    <string name="notif_new_recipe_body">%1$s de %2$s</string>
+    <string name="notif_timer_title">Temporizador terminado</string>
+    <string name="notif_timer_body">%1$s: ¡es hora del siguiente paso!</string>
+</resources>

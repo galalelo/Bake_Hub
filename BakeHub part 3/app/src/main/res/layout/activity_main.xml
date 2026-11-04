@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream"
+    android:orientation="vertical">
+
+    <!-- Offline mode banner (shown by MainActivity while there is no connection) -->
+    <TextView
+        android:id="@+id/offline_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/terracotta"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/offline_banner"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/screen_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/cream"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView android:id="@+id/nav_home" style="@style/NavItem" android:text="@string/nav_home" />
+        <TextView android:id="@+id/nav_search" style="@style/NavItem" android:text="@string/nav_search" />
+        <TextView android:id="@+id/nav_box" style="@style/NavItem" android:text="@string/nav_box" />
+        <TextView android:id="@+id/nav_grocery" style="@style/NavItem" android:text="@string/nav_grocery" />
+        <TextView android:id="@+id/nav_profile" style="@style/NavItem" android:text="@string/nav_profile" />
+    </LinearLayout>
+</LinearLayout>

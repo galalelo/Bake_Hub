@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+ backup / device-transfer rules. Account data lives in Firebase, so only
+     non-sensitive preferences are backed up; the offline recipe cache is re-downloaded. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="sharedpref" path="bakehub_prefs.xml" />
+        <exclude domain="sharedpref" path="online_recipe_cache.xml" />
+        <exclude domain="database" />
+        <exclude domain="file" />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="sharedpref" path="bakehub_prefs.xml" />
+    </device-transfer>
+</data-extraction-rules>

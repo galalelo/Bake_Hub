@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">BakeHub</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">⌂\nHome</string>
+    <string name="nav_search">⌕\nSearch</string>
+    <string name="nav_box">☷\nBox</string>
+    <string name="nav_grocery">🛒\nGrocery</string>
+    <string name="nav_profile">♙\nProfile</string>
+
+    <!-- Banner -->
+    <string name="offline_banner">You\'re offline. Changes will sync when you reconnect.</string>
+
+    <!-- Onboarding / auth -->
+    <string name="tagline">Bake smarter, together.</string>
+    <string name="get_started">Get Started</string>
+    <string name="have_account">I already have an account</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="login_subtitle">Log in to continue baking</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="continue_google">Continue with Google</string>
+    <string name="new_here">New here? Create an account</string>
+    <string name="login_failed">Login failed</string>
+    <string name="google_not_configured">Google sign-in isn\'t set up for this build yet. Use email and password instead.</string>
+    <string name="google_no_account">No Google account was found on this device. Add one in Android settings and try again.</string>
+    <string name="google_failed">Google sign-in failed</string>
+    <string name="back_button">‹ Back</string>
+    <string name="create_account_title">Create your account</string>
+    <string name="display_name_hint">Display name</string>
+    <string name="password_hint_new">Password (6+ characters)</string>
+    <string name="create_account">Create Account</string>
+    <string name="signup_failed">Sign-up failed</string>
+
+    <!-- Home -->
+    <string name="hello_user">Hello, %1$s</string>
+    <string name="streak_level">🔥 %1$d-day streak · Lvl %2$d</string>
+    <string name="search_hint">Search recipes, ingredients…</string>
+    <string name="recommended">Recommended for you</string>
+    <string name="discover_new">Discover something new</string>
+    <string name="community">From the BakeHub community</string>
+
+    <!-- Search -->
+    <string name="recipes_from_firestore">%1$d recipes from Firestore</string>
+    <string name="saved_in_firebase">Saved in Firebase</string>
+    <string name="searching_online">Searching online recipes…</string>
+    <string name="recipes_firestore_online">%1$d recipes · Firestore + online</string>
+    <string name="online_attribution">Online · open source link for attribution</string>
+    <string name="search_offline_notice">You\'re offline, so online results aren\'t available. Showing saved recipes only.</string>
+
+    <!-- Recipe box -->
+    <string name="recipe_box_title">My Recipe Box</string>
+    <string name="saved_count_sync">%1$d saved · Firebase Firestore sync</string>
+    <string name="new_recipe_link">+ New recipe</string>
+    <string name="no_saved">You haven\'t saved any recipes yet.</string>
+    <string name="saved_in_box">Saved in Recipe Box</string>
+    <string name="loading_online">Loading your online recipes...</string>
+    <string name="saved_from_mealdb">Saved from TheMealDB</string>
+    <string name="load_saved_failed">Couldn\'t load your saved recipes. Please try again.</string>
+    <string name="no_saved_displayable">No saved recipes could be displayed.</string>
+
+    <!-- Grocery -->
+    <string name="grocery_title">This Week\'s List</string>
+    <string name="grocery_subtitle">Your grocery list</string>
+    <string name="grocery_empty">Your grocery list is empty.</string>
+    <string name="err_update_item">Could not update item: %1$s</string>
+    <string name="edit">Edit</string>
+    <string name="item_name">Item name</string>
+    <string name="quantity">Quantity</string>
+    <string name="edit_grocery_item">Edit grocery item</string>
+    <string name="save">Save</string>
+    <string name="err_edit_item">Could not edit item: %1$s</string>
+    <string name="enter_both_fields">Please enter both fields.</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_grocery_item">Delete grocery item</string>
+    <string name="confirm_delete_item">Are you sure you want to delete %1$s?</string>
+    <string name="delete">Delete</string>
+    <string name="err_delete_item">Could not delete item: %1$s</string>
+    <string name="add_grocery_button">+ Add grocery item</string>
+    <string name="quantity_example">Quantity (e.g. 2 cups)</string>
+    <string name="add_grocery_title">Add grocery item</string>
+    <string name="add">Add</string>
+    <string name="err_add_item">Could not add item: %1$s</string>
+    <string name="share_list">Share List</string>
+    <string name="grocery_share_header">BakeHub Grocery List</string>
+    <string name="share_chooser_title">Share grocery list</string>
+
+    <!-- Profile -->
+    <string name="profile_level_xp">Level %1$d · %2$d XP</string>
+    <string name="profile_streak">🔥 Current streak: %1$d days</string>
+    <string name="badges">Badges</string>
+    <string name="profile_stats">%1$d bakes completed · %2$d recipes shared</string>
+    <string name="settings_button">⚙ Settings</string>
+
+    <!-- Create recipe -->
+    <string name="new_recipe_title">New Recipe</string>
+    <string name="recipe_title_hint">Recipe title</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="ingredient_example">e.g. 2 cups flour</string>
+    <string name="steps">Steps</string>
+    <string name="first_step_hint">Describe the first step</string>
+    <string name="publish_recipe">Publish Recipe</string>
+    <string name="untitled_recipe">Untitled Recipe</string>
+    <string name="err_publish">Could not publish</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="imperial_units">Imperial units</string>
+    <string name="notifications_toggle">New recipe notifications</string>
+    <string name="language_button">🌐 Language: %1$s</string>
+    <string name="language_title">Choose language</string>
+    <string name="language_system">System default</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="log_out">Log Out</string>
+    <string name="delete_account">Delete account</string>
+    <string name="delete_account_title">Delete your account?</string>
+    <string name="delete_account_message">This permanently deletes your profile, saved recipes, grocery list and the recipes you published. This cannot be undone.</string>
+    <string name="reauth_title">Confirm your password to delete your account</string>
+    <string name="account_deleted">Your account has been deleted.</string>
+    <string name="err_delete_account">Could not delete account: %1$s</string>
+    <string name="err_needs_internet">An internet connection is required.</string>
+
+    <!-- Recipe detail -->
+    <string name="detail_info_full">%1$s · %2$s · ★ %3$s · %4$d min · %5$d servings</string>
+    <string name="detail_info_short">%1$s · ★ %2$s · %3$d min · %4$d servings</string>
+    <string name="row_info">%1$s · ★ %2$s · %3$d min</string>
+    <string name="no_ingredients">No ingredient information available.</string>
+    <string name="instructions">Instructions</string>
+    <string name="step_number">Step %1$d</string>
+    <string name="start_bake">Start Bake Mode ▶</string>
+    <string name="saved_to_box">★ Saved to Recipe Box</string>
+    <string name="save_to_box">☆ Save to Recipe Box</string>
+    <string name="view_original">View original recipe</string>
+    <string name="report_recipe">⚑ Report this recipe</string>
+    <string name="report_dialog_title">Why are you reporting this recipe?</string>
+    <string name="report_reason_offensive">Inappropriate or offensive</string>
+    <string name="report_reason_spam">Spam or misleading</string>
+    <string name="report_reason_copyright">Copyright concern</string>
+    <string name="report_reason_other">Something else</string>
+    <string name="report_sent">Thanks - your report has been sent.</string>
+    <string name="report_failed">Could not send the report.</string>
+
+    <!-- Bake mode -->
+    <string name="bake_start">▶ Start</string>
+    <string name="bake_resume">▶ Resume</string>
+    <string name="bake_pause">Ⅱ Pause</string>
+    <string name="bake_reset">↻ Reset</string>
+    <string name="bake_back">◀ Back</string>
+    <string name="bake_exit">Exit</string>
+    <string name="bake_next">Next ▶</string>
+    <string name="bake_finish">Finish ✓</string>
+    <string name="bake_step_of">Step %1$d of %2$d</string>
+    <string name="timer_finished">Timer finished!</string>
+
+    <!-- Notifications -->
+    <string name="channel_new_recipes_name">New recipes</string>
+    <string name="channel_new_recipes_desc">Alerts when someone publishes a new recipe to the BakeHub community.</string>
+    <string name="channel_timers_name">Bake timers</string>
+    <string name="channel_timers_desc">Alerts when a Bake Mode step timer finishes.</string>
+    <string name="notif_new_recipe_title">New recipe on BakeHub</string>
+    <string name="notif_new_recipe_body">%1$s by %2$s</string>
+    <string name="notif_timer_title">Timer finished</string>
+    <string name="notif_timer_body">%1$s - time for the next step!</string>
+
+    <!-- Language names (shown in their own language) and URLs: never translated -->
+    <string name="lang_english" translatable="false">English</string>
+    <string name="lang_spanish" translatable="false">Español</string>
+    <string name="lang_french" translatable="false">Français</string>
+    <string name="lang_arabic" translatable="false">العربية</string>
+    <string name="privacy_policy_url" translatable="false">https://github.com/galalelo/Bake_Hub/blob/main/docs/PRIVACY_POLICY.md</string>
+</resources>

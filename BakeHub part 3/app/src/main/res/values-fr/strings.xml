@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_home">⌂\nAccueil</string>
+    <string name="nav_search">⌕\nRecherche</string>
+    <string name="nav_box">☷\nBoîte</string>
+    <string name="nav_grocery">🛒\nCourses</string>
+    <string name="nav_profile">♙\nProfil</string>
+
+    <string name="offline_banner">Vous êtes hors ligne. Les modifications seront synchronisées à la reconnexion.</string>
+
+    <string name="tagline">Pâtissez mieux, ensemble.</string>
+    <string name="get_started">Commencer</string>
+    <string name="have_account">J\'ai déjà un compte</string>
+    <string name="welcome_back">Bon retour</string>
+    <string name="login_subtitle">Connectez-vous pour continuer à pâtisser</string>
+    <string name="email_hint">Adresse e-mail</string>
+    <string name="password_hint">Mot de passe</string>
+    <string name="log_in">Se connecter</string>
+    <string name="continue_google">Continuer avec Google</string>
+    <string name="new_here">Nouveau ? Créez un compte</string>
+    <string name="login_failed">Échec de la connexion</string>
+    <string name="google_not_configured">La connexion Google n\'est pas encore configurée pour cette version. Utilisez votre e-mail et votre mot de passe.</string>
+    <string name="google_no_account">Aucun compte Google trouvé sur cet appareil. Ajoutez-en un dans les paramètres Android et réessayez.</string>
+    <string name="google_failed">Échec de la connexion Google</string>
+    <string name="back_button">‹ Retour</string>
+    <string name="create_account_title">Créez votre compte</string>
+    <string name="display_name_hint">Nom affiché</string>
+    <string name="password_hint_new">Mot de passe (6 caractères min.)</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="signup_failed">Échec de l\'inscription</string>
+
+    <string name="hello_user">Bonjour, %1$s</string>
+    <string name="streak_level">🔥 Série de %1$d jours · Niv. %2$d</string>
+    <string name="search_hint">Rechercher des recettes, des ingrédients…</string>
+    <string name="recommended">Recommandé pour vous</string>
+    <string name="discover_new">Découvrez du nouveau</string>
+    <string name="community">De la communauté BakeHub</string>
+
+    <string name="recipes_from_firestore">%1$d recettes depuis Firestore</string>
+    <string name="saved_in_firebase">Enregistrée dans Firebase</string>
+    <string name="searching_online">Recherche de recettes en ligne…</string>
+    <string name="recipes_firestore_online">%1$d recettes · Firestore + en ligne</string>
+    <string name="online_attribution">En ligne · lien open source pour l\'attribution</string>
+    <string name="search_offline_notice">Vous êtes hors ligne : aucun résultat en ligne. Seules les recettes enregistrées sont affichées.</string>
+
+    <string name="recipe_box_title">Ma boîte à recettes</string>
+    <string name="saved_count_sync">%1$d enregistrées · synchronisation Firebase Firestore</string>
+    <string name="new_recipe_link">+ Nouvelle recette</string>
+    <string name="no_saved">Vous n\'avez encore enregistré aucune recette.</string>
+    <string name="saved_in_box">Enregistrée dans la boîte à recettes</string>
+    <string name="loading_online">Chargement de vos recettes en ligne...</string>
+    <string name="saved_from_mealdb">Enregistrée depuis TheMealDB</string>
+    <string name="load_saved_failed">Impossible de charger vos recettes enregistrées. Veuillez réessayer.</string>
+    <string name="no_saved_displayable">Aucune recette enregistrée n\'a pu être affichée.</string>
+
+    <string name="grocery_title">Liste de la semaine</string>
+    <string name="grocery_subtitle">Votre liste de courses</string>
+    <string name="grocery_empty">Votre liste de courses est vide.</string>
+    <string name="err_update_item">Impossible de mettre à jour l\'article : %1$s</string>
+    <string name="edit">Modifier</string>
+    <string name="item_name">Nom de l\'article</string>
+    <string name="quantity">Quantité</string>
+    <string name="edit_grocery_item">Modifier l\'article</string>
+    <string name="save">Enregistrer</string>
+    <string name="err_edit_item">Impossible de modifier l\'article : %1$s</string>
+    <string name="enter_both_fields">Veuillez remplir les deux champs.</string>
+    <string name="cancel">Annuler</string>
+    <string name="delete_grocery_item">Supprimer l\'article</string>
+    <string name="confirm_delete_item">Voulez-vous vraiment supprimer %1$s ?</string>
+    <string name="delete">Supprimer</string>
+    <string name="err_delete_item">Impossible de supprimer l\'article : %1$s</string>
+    <string name="add_grocery_button">+ Ajouter un article</string>
+    <string name="quantity_example">Quantité (p. ex. 2 tasses)</string>
+    <string name="add_grocery_title">Ajouter un article</string>
+    <string name="add">Ajouter</string>
+    <string name="err_add_item">Impossible d\'ajouter l\'article : %1$s</string>
+    <string name="share_list">Partager la liste</string>
+    <string name="grocery_share_header">Liste de courses BakeHub</string>
+    <string name="share_chooser_title">Partager la liste de courses</string>
+
+    <string name="profile_level_xp">Niveau %1$d · %2$d XP</string>
+    <string name="profile_streak">🔥 Série actuelle : %1$d jours</string>
+    <string name="badges">Badges</string>
+    <string name="profile_stats">%1$d fournées terminées · %2$d recettes partagées</string>
+    <string name="settings_button">⚙ Paramètres</string>
+
+    <string name="new_recipe_title">Nouvelle recette</string>
+    <string name="recipe_title_hint">Titre de la recette</string>
+    <string name="ingredients">Ingrédients</string>
+    <string name="ingredient_example">p. ex. 2 tasses de farine</string>
+    <string name="steps">Étapes</string>
+    <string name="first_step_hint">Décrivez la première étape</string>
+    <string name="publish_recipe">Publier la recette</string>
+    <string name="untitled_recipe">Recette sans titre</string>
+    <string name="err_publish">Publication impossible</string>
+
+    <string name="settings_title">Paramètres</string>
+    <string name="imperial_units">Unités impériales</string>
+    <string name="notifications_toggle">Notifications de nouvelles recettes</string>
+    <string name="language_button">🌐 Langue : %1$s</string>
+    <string name="language_title">Choisir la langue</string>
+    <string name="language_system">Langue du système</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
+    <string name="log_out">Se déconnecter</string>
+    <string name="delete_account">Supprimer le compte</string>
+    <string name="delete_account_title">Supprimer votre compte ?</string>
+    <string name="delete_account_message">Votre profil, vos recettes enregistrées, votre liste de courses et les recettes que vous avez publiées seront définitivement supprimés. Cette action est irréversible.</string>
+    <string name="reauth_title">Confirmez votre mot de passe pour supprimer votre compte</string>
+    <string name="account_deleted">Votre compte a été supprimé.</string>
+    <string name="err_delete_account">Impossible de supprimer le compte : %1$s</string>
+    <string name="err_needs_internet">Une connexion internet est requise.</string>
+
+    <string name="detail_info_full">%1$s · %2$s · ★ %3$s · %4$d min · %5$d portions</string>
+    <string name="detail_info_short">%1$s · ★ %2$s · %3$d min · %4$d portions</string>
+    <string name="row_info">%1$s · ★ %2$s · %3$d min</string>
+    <string name="no_ingredients">Aucune information sur les ingrédients.</string>
+    <string name="instructions">Instructions</string>
+    <string name="step_number">Étape %1$d</string>
+    <string name="start_bake">Lancer le mode pâtisserie ▶</string>
+    <string name="saved_to_box">★ Enregistrée dans la boîte à recettes</string>
+    <string name="save_to_box">☆ Enregistrer dans la boîte à recettes</string>
+    <string name="view_original">Voir la recette originale</string>
+    <string name="report_recipe">⚑ Signaler cette recette</string>
+    <string name="report_dialog_title">Pourquoi signalez-vous cette recette ?</string>
+    <string name="report_reason_offensive">Inappropriée ou offensante</string>
+    <string name="report_reason_spam">Spam ou trompeuse</string>
+    <string name="report_reason_copyright">Problème de droits d\'auteur</string>
+    <string name="report_reason_other">Autre raison</string>
+    <string name="report_sent">Merci : votre signalement a été envoyé.</string>
+    <string name="report_failed">Impossible d\'envoyer le signalement.</string>
+
+    <string name="bake_start">▶ Démarrer</string>
+    <string name="bake_resume">▶ Reprendre</string>
+    <string name="bake_pause">Ⅱ Pause</string>
+    <string name="bake_reset">↻ Réinitialiser</string>
+    <string name="bake_back">◀ Retour</string>
+    <string name="bake_exit">Quitter</string>
+    <string name="bake_next">Suivant ▶</string>
+    <string name="bake_finish">Terminer ✓</string>
+    <string name="bake_step_of">Étape %1$d sur %2$d</string>
+    <string name="timer_finished">Minuteur terminé !</string>
+
+    <string name="channel_new_recipes_name">Nouvelles recettes</string>
+    <string name="channel_new_recipes_desc">Alertes lorsqu\'une personne publie une nouvelle recette dans la communauté BakeHub.</string>
+    <string name="channel_timers_name">Minuteurs de cuisson</string>
+    <string name="channel_timers_desc">Alertes lorsque le minuteur d\'une étape du mode pâtisserie se termine.</string>
+    <string name="notif_new_recipe_title">Nouvelle recette sur BakeHub</string>
+    <string name="notif_new_recipe_body">%1$s par %2$s</string>
+    <string name="notif_timer_title">Minuteur terminé</string>
+    <string name="notif_timer_body">%1$s : passez à l\'étape suivante !</string>
+</resources>

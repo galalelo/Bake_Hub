@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_home">⌂\nالرئيسية</string>
+    <string name="nav_search">⌕\nبحث</string>
+    <string name="nav_box">☷\nالصندوق</string>
+    <string name="nav_grocery">🛒\nالمشتريات</string>
+    <string name="nav_profile">♙\nالملف</string>
+
+    <string name="offline_banner">أنت غير متصل بالإنترنت. ستتم مزامنة تغييراتك عند إعادة الاتصال.</string>
+
+    <string name="tagline">اخبز بذكاء، معًا.</string>
+    <string name="get_started">ابدأ الآن</string>
+    <string name="have_account">لدي حساب بالفعل</string>
+    <string name="welcome_back">أهلًا بعودتك</string>
+    <string name="login_subtitle">سجّل الدخول لمواصلة الخَبز</string>
+    <string name="email_hint">البريد الإلكتروني</string>
+    <string name="password_hint">كلمة المرور</string>
+    <string name="log_in">تسجيل الدخول</string>
+    <string name="continue_google">المتابعة باستخدام Google</string>
+    <string name="new_here">جديد هنا؟ أنشئ حسابًا</string>
+    <string name="login_failed">فشل تسجيل الدخول</string>
+    <string name="google_not_configured">تسجيل الدخول عبر Google غير مفعّل في هذا الإصدار بعد. استخدم البريد الإلكتروني وكلمة المرور.</string>
+    <string name="google_no_account">لم يتم العثور على حساب Google على هذا الجهاز. أضف حسابًا من إعدادات أندرويد وحاول مرة أخرى.</string>
+    <string name="google_failed">فشل تسجيل الدخول عبر Google</string>
+    <string name="back_button">‹ رجوع</string>
+    <string name="create_account_title">أنشئ حسابك</string>
+    <string name="display_name_hint">الاسم الظاهر</string>
+    <string name="password_hint_new">كلمة المرور (6 أحرف على الأقل)</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="signup_failed">فشل إنشاء الحساب</string>
+
+    <string name="hello_user">مرحبًا، %1$s</string>
+    <string name="streak_level">🔥 سلسلة %1$d أيام · المستوى %2$d</string>
+    <string name="search_hint">ابحث عن وصفات ومكوّنات…</string>
+    <string name="recommended">موصى به لك</string>
+    <string name="discover_new">اكتشف شيئًا جديدًا</string>
+    <string name="community">من مجتمع BakeHub</string>
+
+    <string name="recipes_from_firestore">%1$d وصفة من Firestore</string>
+    <string name="saved_in_firebase">محفوظة في Firebase</string>
+    <string name="searching_online">جارٍ البحث عن وصفات عبر الإنترنت…</string>
+    <string name="recipes_firestore_online">%1$d وصفة · Firestore + الإنترنت</string>
+    <string name="online_attribution">عبر الإنترنت · رابط مفتوح المصدر للإسناد</string>
+    <string name="search_offline_notice">أنت غير متصل، لذا لا تتوفر نتائج الإنترنت. تُعرض الوصفات المحفوظة فقط.</string>
+
+    <string name="recipe_box_title">صندوق وصفاتي</string>
+    <string name="saved_count_sync">%1$d محفوظة · مزامنة Firebase Firestore</string>
+    <string name="new_recipe_link">+ وصفة جديدة</string>
+    <string name="no_saved">لم تحفظ أي وصفات بعد.</string>
+    <string name="saved_in_box">محفوظة في صندوق الوصفات</string>
+    <string name="loading_online">جارٍ تحميل وصفاتك من الإنترنت...</string>
+    <string name="saved_from_mealdb">محفوظة من TheMealDB</string>
+    <string name="load_saved_failed">تعذّر تحميل وصفاتك المحفوظة. يُرجى المحاولة مرة أخرى.</string>
+    <string name="no_saved_displayable">تعذّر عرض أي وصفات محفوظة.</string>
+
+    <string name="grocery_title">قائمة هذا الأسبوع</string>
+    <string name="grocery_subtitle">قائمة مشترياتك</string>
+    <string name="grocery_empty">قائمة مشترياتك فارغة.</string>
+    <string name="err_update_item">تعذّر تحديث العنصر: %1$s</string>
+    <string name="edit">تعديل</string>
+    <string name="item_name">اسم العنصر</string>
+    <string name="quantity">الكمية</string>
+    <string name="edit_grocery_item">تعديل العنصر</string>
+    <string name="save">حفظ</string>
+    <string name="err_edit_item">تعذّر تعديل العنصر: %1$s</string>
+    <string name="enter_both_fields">يُرجى ملء الحقلين.</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete_grocery_item">حذف العنصر</string>
+    <string name="confirm_delete_item">هل أنت متأكد أنك تريد حذف %1$s؟</string>
+    <string name="delete">حذف</string>
+    <string name="err_delete_item">تعذّر حذف العنصر: %1$s</string>
+    <string name="add_grocery_button">+ إضافة عنصر</string>
+    <string name="quantity_example">الكمية (مثل: كوبان)</string>
+    <string name="add_grocery_title">إضافة عنصر</string>
+    <string name="add">إضافة</string>
+    <string name="err_add_item">تعذّرت إضافة العنصر: %1$s</string>
+    <string name="share_list">مشاركة القائمة</string>
+    <string name="grocery_share_header">قائمة مشتريات BakeHub</string>
+    <string name="share_chooser_title">مشاركة قائمة المشتريات</string>
+
+    <string name="profile_level_xp">المستوى %1$d · %2$d نقطة خبرة</string>
+    <string name="profile_streak">🔥 السلسلة الحالية: %1$d أيام</string>
+    <string name="badges">الأوسمة</string>
+    <string name="profile_stats">%1$d عمليات خَبز مكتملة · %2$d وصفات مشاركة</string>
+    <string name="settings_button">⚙ الإعدادات</string>
+
+    <string name="new_recipe_title">وصفة جديدة</string>
+    <string name="recipe_title_hint">عنوان الوصفة</string>
+    <string name="ingredients">المكوّنات</string>
+    <string name="ingredient_example">مثل: كوبان من الدقيق</string>
+    <string name="steps">الخطوات</string>
+    <string name="first_step_hint">صِف الخطوة الأولى</string>
+    <string name="publish_recipe">نشر الوصفة</string>
+    <string name="untitled_recipe">وصفة بلا عنوان</string>
+    <string name="err_publish">تعذّر النشر</string>
+
+    <string name="settings_title">الإعدادات</string>
+    <string name="imperial_units">الوحدات الإمبراطورية</string>
+    <string name="notifications_toggle">إشعارات الوصفات الجديدة</string>
+    <string name="language_button">🌐 اللغة: %1$s</string>
+    <string name="language_title">اختر اللغة</string>
+    <string name="language_system">افتراضي النظام</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="log_out">تسجيل الخروج</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="delete_account_title">هل تريد حذف حسابك؟</string>
+    <string name="delete_account_message">سيتم حذف ملفك الشخصي ووصفاتك المحفوظة وقائمة مشترياتك والوصفات التي نشرتها نهائيًا. لا يمكن التراجع عن ذلك.</string>
+    <string name="reauth_title">أكّد كلمة المرور لحذف حسابك</string>
+    <string name="account_deleted">تم حذف حسابك.</string>
+    <string name="err_delete_account">تعذّر حذف الحساب: %1$s</string>
+    <string name="err_needs_internet">يلزم الاتصال بالإنترنت.</string>
+
+    <string name="detail_info_full">%1$s · %2$s · ★ %3$s · %4$d دقيقة · %5$d حصص</string>
+    <string name="detail_info_short">%1$s · ★ %2$s · %3$d دقيقة · %4$d حصص</string>
+    <string name="row_info">%1$s · ★ %2$s · %3$d دقيقة</string>
+    <string name="no_ingredients">لا تتوفر معلومات عن المكوّنات.</string>
+    <string name="instructions">طريقة التحضير</string>
+    <string name="step_number">الخطوة %1$d</string>
+    <string name="start_bake">ابدأ وضع الخَبز ▶</string>
+    <string name="saved_to_box">★ محفوظة في صندوق الوصفات</string>
+    <string name="save_to_box">☆ احفظ في صندوق الوصفات</string>
+    <string name="view_original">عرض الوصفة الأصلية</string>
+    <string name="report_recipe">⚑ الإبلاغ عن هذه الوصفة</string>
+    <string name="report_dialog_title">لماذا تبلّغ عن هذه الوصفة؟</string>
+    <string name="report_reason_offensive">غير لائقة أو مسيئة</string>
+    <string name="report_reason_spam">بريد مزعج أو مضلِّلة</string>
+    <string name="report_reason_copyright">مشكلة في حقوق النشر</string>
+    <string name="report_reason_other">سبب آخر</string>
+    <string name="report_sent">شكرًا لك، تم إرسال بلاغك.</string>
+    <string name="report_failed">تعذّر إرسال البلاغ.</string>
+
+    <string name="bake_start">▶ ابدأ</string>
+    <string name="bake_resume">▶ استئناف</string>
+    <string name="bake_pause">Ⅱ إيقاف مؤقت</string>
+    <string name="bake_reset">↻ إعادة ضبط</string>
+    <string name="bake_back">◀ رجوع</string>
+    <string name="bake_exit">خروج</string>
+    <string name="bake_next">التالي ▶</string>
+    <string name="bake_finish">إنهاء ✓</string>
+    <string name="bake_step_of">الخطوة %1$d من %2$d</string>
+    <string name="timer_finished">انتهى المؤقّت!</string>
+
+    <string name="channel_new_recipes_name">وصفات جديدة</string>
+    <string name="channel_new_recipes_desc">تنبيهات عند نشر أحدهم وصفة جديدة في مجتمع BakeHub.</string>
+    <string name="channel_timers_name">مؤقّتات الخَبز</string>
+    <string name="channel_timers_desc">تنبيهات عند انتهاء مؤقّت خطوة في وضع الخَبز.</string>
+    <string name="notif_new_recipe_title">وصفة جديدة على BakeHub</string>
+    <string name="notif_new_recipe_body">%1$s من %2$s</string>
+    <string name="notif_timer_title">انتهى المؤقّت</string>
+    <string name="notif_timer_body">%1$s: حان وقت الخطوة التالية!</string>
+</resources>
