@@ -101,18 +101,19 @@ Firebase
 
 ## Repository layout
 
-The Android project currently lives in the `BakeHub part 3/` folder of this repository.
+The Android project lives in `BakeHub part 3/`. GitHub Actions workflow definitions are stored at the repository root under `.github/workflows/`, where GitHub can discover them.
 
 ```text
+.github/workflows/
+├── android.yml                  CI workflow
+└── release.yml                  Signed bundle workflow
 BakeHub part 3/
 ├── app/                         Android application and resources
 ├── functions/                   Firebase Cloud Functions
 ├── docs/                        AI-use statement, privacy policy, release checklist
 ├── firestore.rules              Firestore access rules
 ├── firestore.rules.test.js      Firestore emulator tests
-├── .github/workflows/
-│   ├── android.yml              CI workflow definition
-│   └── release.yml              Release bundle workflow definition
+├── package.json                 Firestore rules test scripts
 └── gradlew                      Gradle wrapper
 
 assets/readme/                   README screenshots
@@ -122,12 +123,10 @@ assets/readme/                   README screenshots
 
 GitHub is the project’s shared source-of-truth: it stores the Android client, Firebase rules and functions, project documentation, workflow definitions and README screenshots. Commits preserve the change history and make it possible to review how the prototype evolved. Pull requests can be used to review changes before they are merged.
 
-The repository contains two GitHub Actions workflow definitions:
+The repository contains two workflows in the required repository-root directory, [`android.yml`](.github/workflows/android.yml) and [`release.yml`](.github/workflows/release.yml). Both set their run working directory to `BakeHub part 3/`, because that is where the Android Gradle project, Cloud Functions and Firestore test package live.
 
-- **Android CI** (`android.yml`) is configured for `push`, `pull_request` and manual `workflow_dispatch` events. It defines jobs for Android JVM unit tests, a debug APK build, Android lint, a release-bundle configuration build, Cloud Functions checks/tests and Firestore security-rule tests. The workflow uploads test reports, a debug APK and a lint report as artifacts where available.
-- **Release bundle** (`release.yml`) is configured for version tags matching `v*` and manual dispatch. It restores an upload keystore from GitHub Actions secrets, runs unit tests, builds a signed Android App Bundle (`.aab`) and uploads the bundle as an artifact.
-
-> **Workflow location check:** in the current repository tree these workflow files are under `BakeHub part 3/.github/workflows/`. GitHub Actions discovers workflows from the repository-root `.github/workflows/` directory. If the Actions tab shows no workflow runs, move the workflow files to that root-level location; the files currently document the intended pipelines but this README does not claim a successful run.
+- **Android CI** runs on `push`, `pull_request` and manual `workflow_dispatch` events. It defines jobs for Android JVM unit tests, a debug APK build, Android lint, a release-bundle configuration build, Cloud Functions checks/tests and Firestore security-rule tests. It uploads test reports, a debug APK and a lint report as artifacts where available.
+- **Release bundle** runs on version tags matching `v*` or manual dispatch. It restores an upload keystore from GitHub Actions secrets, runs unit tests, builds a signed Android App Bundle (`.aab`) and uploads the bundle as an artifact. It does not publish the app to Google Play.
 
 For a signed release workflow, configure these repository secrets under **Settings → Secrets and variables → Actions**: `BAKEHUB_KEYSTORE_BASE64`, `BAKEHUB_STORE_PASSWORD`, `BAKEHUB_KEY_ALIAS` and `BAKEHUB_KEY_PASSWORD`. Never commit a keystore, passwords, API keys or other private credentials.
 
@@ -217,7 +216,7 @@ This version extends that baseline as follows:
 - The app interface is localized, but external and user-created recipe content remains in its original language.
 - The Metric/Imperial preference is stored but is not yet applied to ingredient quantities.
 - Firebase, OAuth, signing, secrets, notification delivery and release readiness depend on deployment-specific configuration and testing.
-- Workflow files should be located at the repository root under `.github/workflows/` for GitHub Actions discovery.
+- The Android project is nested in `BakeHub part 3/`; workflow run steps explicitly use that directory so Actions commands and artifacts resolve correctly.
 
 See [`BakeHub part 3/docs/RELEASE_CHECKLIST.md`](BakeHub%20part%203/docs/RELEASE_CHECKLIST.md) for remaining Play Store tasks, [`BakeHub part 3/docs/PRIVACY_POLICY.md`](BakeHub%20part%203/docs/PRIVACY_POLICY.md) for the project privacy policy, and [`BakeHub part 3/docs/AI_USE.md`](BakeHub%20part%203/docs/AI_USE.md) for the project’s AI-use disclosure.
 
