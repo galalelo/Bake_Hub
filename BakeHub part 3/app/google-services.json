@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "233834005032-m7i7fl2ukontgqa8lav5dcm5m41514sk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bakehub.app",
+            "certificate_hash": "e39a9ea14dcb3db4c115487202464a3dc5e47075"
+          }
+        },
+        {
           "client_id": "233834005032-mm39hucut7p2kdgm5hnm7l0ic55s8hpb.apps.googleusercontent.com",
           "client_type": 3
         }
