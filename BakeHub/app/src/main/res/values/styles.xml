@@ -1,3 +1,0 @@
-<resources>
-<style name="NavItem" parent="android:style/Widget.Material.TextView"><item name="android:layout_width">0dp</item><item name="android:layout_height">match_parent</item><item name="android:layout_weight">1</item><item name="android:gravity">center</item><item name="android:textSize">12sp</item><item name="android:textColor">@color/grey_text</item></style>
-</resources>
