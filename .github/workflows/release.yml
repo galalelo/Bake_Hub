@@ -1,0 +1,72 @@
+name: Release bundle
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    name: Build signed Android App Bundle
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "BakeHub part 3"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+          cache-dependency-path: "BakeHub part 3/gradle/wrapper/gradle-wrapper.properties"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Restore upload keystore
+        env:
+          KEYSTORE_B64: ${{ secrets.BAKEHUB_KEYSTORE_BASE64 }}
+        run: |
+          set -e
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo "ERROR: BAKEHUB_KEYSTORE_BASE64 secret is not set."
+            exit 1
+          fi
+          echo "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/upload-key.jks"
+          test -s "$RUNNER_TEMP/upload-key.jks" || {
+            echo "ERROR: Keystore file is empty."
+            exit 1
+          }
+
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest --no-daemon
+
+      - name: Build signed release bundle
+        env:
+          BAKEHUB_STORE_FILE: ${{ runner.temp }}/upload-key.jks
+          BAKEHUB_STORE_PASSWORD: ${{ secrets.BAKEHUB_STORE_PASSWORD }}
+          BAKEHUB_KEY_ALIAS: ${{ secrets.BAKEHUB_KEY_ALIAS }}
+          BAKEHUB_KEY_PASSWORD: ${{ secrets.BAKEHUB_KEY_PASSWORD }}
+        run: ./gradlew bundleRelease --no-daemon
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: bakehub-release-aab
+          path: BakeHub part 3/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 30

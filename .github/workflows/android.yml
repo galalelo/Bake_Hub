@@ -1,0 +1,157 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-tests:
+    name: Android unit tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "BakeHub part 3"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      - name: Run JVM unit tests
+        run: ./gradlew testDebugUnitTest --no-daemon
+
+      - name: Upload unit test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-report
+          path: BakeHub part 3/app/build/reports/tests/testDebugUnitTest/
+          if-no-files-found: ignore
+
+  build:
+    name: Build, lint and release bundle
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "BakeHub part 3"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Android lint
+        run: ./gradlew lintDebug --no-daemon
+
+      - name: Build release bundle
+        run: ./gradlew bundleRelease --no-daemon
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: bakehub-debug-apk
+          path: BakeHub part 3/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload release AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: bakehub-release-aab
+          path: BakeHub part 3/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: ignore
+
+      - name: Upload lint report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report
+          path: BakeHub part 3/app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore
+
+  functions:
+    name: Cloud Functions tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "BakeHub part 3/functions"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: "BakeHub part 3/functions/package-lock.json"
+
+      - name: Install Cloud Functions dependencies
+        run: npm ci
+
+      - name: Run Functions checks
+        run: npm run check
+
+      - name: Run Functions tests
+        run: npm test
+
+  firestore-rules:
+    name: Firestore security-rules tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "BakeHub part 3"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: "BakeHub part 3/package-lock.json"
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Run Firestore rules tests
+        run: npm run test:rules
