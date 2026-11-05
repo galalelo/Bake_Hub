@@ -148,4 +148,6 @@
     <string name="notif_new_recipe_body">%1$s من %2$s</string>
     <string name="notif_timer_title">انتهى المؤقّت</string>
     <string name="notif_timer_body">%1$s: حان وقت الخطوة التالية!</string>
+    <string name="err_recipe_incomplete">أضف مكوّنًا واحدًا وخطوة واحدة على الأقل.</string>
+    <string name="no_steps">لا تحتوي هذه الوصفة على خطوات.</string>
 </resources>

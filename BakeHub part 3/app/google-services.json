@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "233834005032-qqvqhg9dduu970536q3ekig9i7bqg19m.apps.googleusercontent.com",
+          "client_id": "233834005032-48jeuqi97rnqlscl5os5sbca9nthn72g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bakehub.app",
-            "certificate_hash": "08a84098fa890682038db7c18842dd8e7feb813e"
+            "certificate_hash": "ae741974675339700c7629fb0e94b4066328055a"
           }
         },
         {

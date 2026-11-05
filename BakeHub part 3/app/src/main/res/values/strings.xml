@@ -170,4 +170,6 @@
     <string name="lang_french" translatable="false">Français</string>
     <string name="lang_arabic" translatable="false">العربية</string>
     <string name="privacy_policy_url" translatable="false">https://github.com/galalelo/Bake_Hub/blob/main/docs/PRIVACY_POLICY.md</string>
+    <string name="err_recipe_incomplete">Add at least one ingredient and one step.</string>
+    <string name="no_steps">This recipe has no steps to follow.</string>
 </resources>

@@ -32,29 +32,24 @@ object RecipeRepository {
     fun startListening() {
         if (listenerRegistration != null) return
 
-        listenerRegistration = recipesRef.addSnapshotListener { snapshot, _ ->
+        listenerRegistration = recipesRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                // A failed listener is terminated by Firestore; allow startListening() to re-attach.
+                listenerRegistration?.remove()
+                listenerRegistration = null
+                return@addSnapshotListener
+            }
             _recipes.value = snapshot?.documents
                 ?.mapNotNull { it.toRecipe() }
                 ?: emptyList()
         }
     }
 
-    /**
-     * Uploads sample recipes if the Firestore collection is empty.
-     */
-    suspend fun seedIfEmpty() {
-        // An empty *local cache* while offline says nothing about the server - don't seed from it.
-        if (!com.bakehub.app.util.NetworkMonitor.isOnline.value) return
-
-        val snapshot = recipesRef.limit(1).get().await()
-
-        if (snapshot.isEmpty) {
-            for (recipe in MockData.recipes) {
-                recipesRef.document(recipe.id)
-                    .set(recipe.toFirestoreMap())
-                    .await()
-            }
-        }
+    /** Detaches the listener (on logout / account deletion) so the next sign-in starts a fresh one. */
+    fun stopListening() {
+        listenerRegistration?.remove()
+        listenerRegistration = null
+        _recipes.value = emptyList()
     }
 
     /**
@@ -170,9 +165,8 @@ object RecipeRepository {
 
 
     /**
-     * Looks up a recipe locally, falling back to MockData.
+     * Looks up a recipe in the live Firestore list.
      */
     fun recipeById(id: String): Recipe? =
         _recipes.value.find { it.id == id }
-            ?: MockData.recipeById(id)
 }

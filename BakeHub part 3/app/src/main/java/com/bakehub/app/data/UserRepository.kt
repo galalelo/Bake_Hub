@@ -73,7 +73,13 @@ object UserRepository {
 
                 if (snapshot == null) return@addSnapshotListener
 
-                _groceryItems.value = snapshot.documents.mapNotNull { document ->
+                _groceryItems.value = snapshot.documents.sortedBy { document ->
+                    // Oldest first; items whose server timestamp is still pending go last.
+                    document.getTimestamp(
+                        "createdAt",
+                        com.google.firebase.firestore.DocumentSnapshot.ServerTimestampBehavior.ESTIMATE
+                    )?.toDate()?.time ?: Long.MAX_VALUE
+                }.mapNotNull { document ->
 
                     val name = document.getString("name") ?: return@mapNotNull null
                     val quantity = document.getString("quantity") ?: ""

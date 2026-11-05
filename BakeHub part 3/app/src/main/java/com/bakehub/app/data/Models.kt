@@ -1,10 +1,7 @@
 package com.bakehub.app.data
 
 /**
- * Prototype data models for BakeHub.
- * These mirror the Firestore document shapes described in the design document
- * (Section 6 — Data captured and stored), simplified for a UI-only prototype
- * that runs entirely on mock, in-memory data (no network/database calls yet).
+ * Data models for BakeHub. These mirror the Firestore document shapes (see FirestoreMappers).
  */
 
 data class Ingredient(

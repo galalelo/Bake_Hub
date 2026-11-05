@@ -44,7 +44,9 @@ class MainActivity : ComponentActivity() {
     private lateinit var container: FrameLayout
     private lateinit var bottomNav: LinearLayout
     private var route = "onboarding"
-    private var selectedRecipe: Recipe = MockData.recipes.first()
+    // Stops the Bake Mode timer and screen-on flag; set while Bake Mode is showing.
+    private var bakeCleanup: (() -> Unit)? = null
+    private var selectedRecipe: Recipe? = null
     private val history = java.util.ArrayDeque<String>()
     private val brown get() = ContextCompat.getColor(this, R.color.dark_brown)
     private val grey get() = ContextCompat.getColor(this, R.color.grey_text)
@@ -52,7 +54,6 @@ class MainActivity : ComponentActivity() {
     private val white get() = ContextCompat.getColor(this, R.color.white)
 
     private var groceryItemsJob: kotlinx.coroutines.Job? = null
-    private val groceryItems = MockData.groceryItems.toMutableList()
 
     // POST_NOTIFICATIONS runtime permission (Android 13+) for real-time recipe notifications.
     private val notificationPermission =
@@ -66,6 +67,8 @@ class MainActivity : ComponentActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("route", route)
+        // Keep the back stack across activity recreation (language change, rotation, ...).
+        outState.putStringArrayList("history", ArrayList(history))
     }
 
     override fun onCreate(state: Bundle?) {
@@ -115,6 +118,9 @@ class MainActivity : ComponentActivity() {
         if (AuthRepository.isLoggedIn) {
             activateFirebase()
             val restorable = setOf("home", "search", "recipe_box", "grocery", "profile", "settings", "create_recipe")
+            // Restore the back stack too (only screens that can be rebuilt without extra state).
+            history.clear()
+            state?.getStringArrayList("history")?.filter { it in restorable }?.let { history.addAll(it) }
             show(state?.getString("route")?.takeIf { it in restorable } ?: "home", false)
         } else show("onboarding", false)
     }
@@ -122,7 +128,6 @@ class MainActivity : ComponentActivity() {
     private fun activateFirebase() {
         UserRepository.startListening()
         RecipeRepository.startListening()
-        lifecycleScope.launch { runCatching { RecipeRepository.seedIfEmpty() } }
         setupNotifications()
     }
 
@@ -141,7 +146,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onDestroy() {
+        bakeCleanup?.invoke()
+        super.onDestroy()
+    }
+
     private fun show(next: String, remember: Boolean = true) {
+        bakeCleanup?.invoke()
+        bakeCleanup = null
         if (remember && next != route) history.addLast(route)
         route = next
         bottomNav.visibility = if (next in setOf("home", "search", "recipe_box", "grocery", "profile")) View.VISIBLE else View.GONE
@@ -176,7 +188,7 @@ class MainActivity : ComponentActivity() {
     private fun login(c: LinearLayout) {
         text(c, getString(R.string.welcome_back), 26, brown, true); text(c, getString(R.string.login_subtitle), 14, grey, top = 4, bottom = 24)
         val email = edit(c, getString(R.string.email_hint)); val password = edit(c, getString(R.string.password_hint), true, 10); val status = text(c, "", 13, terra, top = 8); status.visibility = View.GONE
-        button(c, getString(R.string.log_in), 20) { lifecycleScope.launch { try { AuthRepository.login(email.text.toString(), password.text.toString()); activateFirebase(); show("home") } catch (e: Exception) { status.text = e.message ?: getString(R.string.login_failed); status.visibility = View.VISIBLE } } }
+        button(c, getString(R.string.log_in), 20) { lifecycleScope.launch { try { AuthRepository.login(email.text.toString(), password.text.toString()); activateFirebase(); history.clear(); show("home", false) } catch (e: Exception) { status.text = e.message ?: getString(R.string.login_failed); status.visibility = View.VISIBLE } } }
         outline(c, getString(R.string.continue_google)) { signInWithGoogle(status) }
         text(c, getString(R.string.new_here), 14, terra, center = true, top = 24).setOnClickListener { show("signup") }
     }
@@ -184,11 +196,22 @@ class MainActivity : ComponentActivity() {
     private fun signup(c: LinearLayout) {
         outline(c, getString(R.string.back_button)) { onBackPressedDispatcher.onBackPressed() }; text(c, getString(R.string.create_account_title), 24, brown, true, top = 12, bottom = 20)
         val name = edit(c, getString(R.string.display_name_hint)); val email = edit(c, getString(R.string.email_hint), top = 10); val password = edit(c, getString(R.string.password_hint_new), true, 10); val status = text(c, "", 13, terra, top = 8); status.visibility = View.GONE
-        button(c, getString(R.string.create_account), 20) { lifecycleScope.launch { try { AuthRepository.signUp(name.text.toString(), email.text.toString(), password.text.toString()); activateFirebase(); show("home") } catch (e: Exception) { status.text = e.message ?: getString(R.string.signup_failed); status.visibility = View.VISIBLE } } }
+        button(c, getString(R.string.create_account), 20) { lifecycleScope.launch { try { AuthRepository.signUp(name.text.toString(), email.text.toString(), password.text.toString()); activateFirebase(); history.clear(); show("home", false) } catch (e: Exception) { status.text = e.message ?: getString(R.string.signup_failed); status.visibility = View.VISIBLE } } }
     }
 
-    private fun currentProfile() = UserRepository.profile.value ?: MockData.currentUser
-    private fun currentRecipes() = RecipeRepository.recipes.value.ifEmpty { MockData.recipes }
+    /** The live Firestore profile, or neutral starting values until it has loaded. */
+    private fun currentProfile() = UserRepository.profile.value ?: UserProfile(
+        displayName = AuthRepository.currentUser?.displayName?.takeIf { it.isNotBlank() } ?: "Baker",
+        skillLevel = "Beginner",
+        level = 1,
+        xp = 0,
+        xpForNextLevel = 500,
+        streakCount = 0,
+        bakesCompleted = 0,
+        recipesShared = 0,
+        unitPreference = "Metric"
+    )
+    private fun currentRecipes() = RecipeRepository.recipes.value
 
 
 
@@ -256,18 +279,20 @@ class MainActivity : ComponentActivity() {
             }
 
             // Firebase recipes appear underneath
-            text(
-                onlineContainer,
-                getString(R.string.community),
-                17,
-                brown,
-                true,
-                top = 18,
-                bottom = 8
-            )
-
-            currentRecipes().take(4).forEach { recipe ->
-                recipeCard(onlineContainer, recipe)
+            val community = currentRecipes().take(4)
+            if (community.isNotEmpty()) {
+                text(
+                    onlineContainer,
+                    getString(R.string.community),
+                    17,
+                    brown,
+                    true,
+                    top = 18,
+                    bottom = 8
+                )
+                community.forEach { recipe ->
+                    recipeCard(onlineContainer, recipe)
+                }
             }
         }
     }
@@ -275,17 +300,20 @@ class MainActivity : ComponentActivity() {
 
 
     private fun search(c: LinearLayout) {
+        var onlineJob: kotlinx.coroutines.Job? = null
         val input = edit(c, getString(R.string.search_hint)); val count = text(c, "", 14, grey, top = 14, bottom = 10); val results = LinearLayout(this); results.orientation = LinearLayout.VERTICAL; c.addView(results)
         fun render() {
             val q = input.text.toString().trim()
+            onlineJob?.cancel()   // drop stale online results from earlier keystrokes
             results.removeAllViews()
             val local = currentRecipes().filter { q.isBlank() || it.title.contains(q, true) || it.category.contains(q, true) }
             count.text = getString(R.string.recipes_from_firestore, local.size)
             local.forEach { recipeRow(results, it, getString(R.string.saved_in_firebase)) }
             if (q.isNotBlank()) {
                 val loading = text(results, getString(R.string.searching_online), 14, grey, top = 8)
-                lifecycleScope.launch {
+                onlineJob = lifecycleScope.launch {
                     val onlineResult = runCatching { RecipeRepository.searchOnline(q) }
+                    if (onlineResult.exceptionOrNull() is kotlinx.coroutines.CancellationException) return@launch
                     val online = onlineResult.getOrDefault(emptyList())
                     loading.visibility = View.GONE
                     if (onlineResult.isFailure) text(results, getString(R.string.search_offline_notice), 13, grey, top = 8)
@@ -643,11 +671,11 @@ class MainActivity : ComponentActivity() {
 
 
 
-    private fun profile(c: LinearLayout) { val u = currentProfile(); c.gravity = Gravity.CENTER_HORIZONTAL; text(c, "◯", 70, grey, center = true); text(c, u.displayName, 20, brown, true, center = true, top = 10); text(c, getString(R.string.profile_level_xp, u.level, u.xp), 14, terra, center = true); text(c, getString(R.string.profile_streak, u.streakCount), 16, brown, top = 18); text(c, getString(R.string.badges), 17, brown, true, top = 22, bottom = 8); MockData.badges.forEach { text(c, "${if (it.unlocked) "🏅" else "🔒"} ${it.name}", 14, if (it.unlocked) brown else grey, top = 4) }; text(c, getString(R.string.profile_stats, u.bakesCompleted, u.recipesShared), 14, grey, top = 24); outline(c, getString(R.string.settings_button), 22) { show("settings") } }
+    private fun profile(c: LinearLayout) { val u = currentProfile(); c.gravity = Gravity.CENTER_HORIZONTAL; text(c, "◯", 70, grey, center = true); text(c, u.displayName, 20, brown, true, center = true, top = 10); text(c, getString(R.string.profile_level_xp, u.level, u.xp), 14, terra, center = true); text(c, getString(R.string.profile_streak, u.streakCount), 16, brown, top = 18); text(c, getString(R.string.profile_stats, u.bakesCompleted, u.recipesShared), 14, grey, top = 24); outline(c, getString(R.string.settings_button), 22) { show("settings") } }
 
     private fun createRecipe(c: LinearLayout) {
         outline(c, getString(R.string.back_button)) { onBackPressedDispatcher.onBackPressed() }; text(c, getString(R.string.new_recipe_title), 22, brown, true, top = 12); val title = edit(c, getString(R.string.recipe_title_hint), top = 16); text(c, getString(R.string.ingredients), 16, brown, true, top = 20, bottom = 8); val ingredient = edit(c, getString(R.string.ingredient_example)); text(c, getString(R.string.steps), 16, brown, true, top = 20, bottom = 8); val step = edit(c, getString(R.string.first_step_hint)); val status = text(c, "", 13, terra, top = 8); status.visibility = View.GONE
-        button(c, getString(R.string.publish_recipe), 20) { val r = Recipe("user-${UUID.randomUUID()}", title.text.toString().ifBlank { getString(R.string.untitled_recipe) }, AuthRepository.currentUser?.displayName ?: "Baker", "User", "Other", Difficulty.EASY, 0, 0, 1, 0f, 0, Nutrition(0, 0f, 0f, 0f), listOf(Ingredient(ingredient.text.toString(), "1", "")), listOf(RecipeStep(1, "Step 1", step.text.toString()))); lifecycleScope.launch { try { RecipeRepository.addRecipe(r); show("recipe_box") } catch (e: Exception) { status.text = e.message ?: getString(R.string.err_publish); status.visibility = View.VISIBLE } } }
+        button(c, getString(R.string.publish_recipe), 20) { if (ingredient.text.isBlank() || step.text.isBlank()) { status.text = getString(R.string.err_recipe_incomplete); status.visibility = View.VISIBLE; return@button }; val r = Recipe("user-${UUID.randomUUID()}", title.text.toString().ifBlank { getString(R.string.untitled_recipe) }, AuthRepository.currentUser?.displayName ?: "Baker", "User", "Other", Difficulty.EASY, 0, 0, 1, 0f, 0, Nutrition(0, 0f, 0f, 0f), listOf(Ingredient(ingredient.text.toString().trim(), "", "")), listOf(RecipeStep(1, "Step 1", step.text.toString().trim()))); lifecycleScope.launch { try { RecipeRepository.addRecipe(r); show("recipe_box") } catch (e: Exception) { status.text = e.message ?: getString(R.string.err_publish); status.visibility = View.VISIBLE } } }
     }
 
     private fun settings(c: LinearLayout) {
@@ -731,7 +759,8 @@ class MainActivity : ComponentActivity() {
             try {
                 AuthRepository.signInWithGoogle(this@MainActivity, clientId)
                 activateFirebase()
-                show("home")
+                history.clear()
+                show("home", false)
             } catch (e: GetCredentialCancellationException) {
                 // The user dismissed the account picker - nothing to report.
             } catch (e: NoCredentialException) {
@@ -820,7 +849,7 @@ class MainActivity : ComponentActivity() {
 
     private fun recipeDetail(c: LinearLayout) {
 
-        val r = selectedRecipe
+        val r = selectedRecipe ?: run { show("home", false); return }
 
         outline(c, getString(R.string.back_button)) {
             onBackPressedDispatcher.onBackPressed()
@@ -858,15 +887,6 @@ class MainActivity : ComponentActivity() {
             .into(recipeImage)
 
         c.addView(recipeImage)
-
-        // RECIPE INFORMATION
-        text(
-            c,
-            getString(R.string.detail_info_short, r.source, r.avgRating.toString(), r.totalTimeMinutes, r.servings),
-            14,
-            grey,
-            bottom = 20
-        )
 
         // INGREDIENTS SECTION
         text(
@@ -947,8 +967,12 @@ class MainActivity : ComponentActivity() {
             10
         ) {
             lifecycleScope.launch {
-                UserRepository.toggleSaved(r.id)
-                show("recipe_detail", false)
+                try {
+                    UserRepository.toggleSaved(r.id)
+                } catch (e: Exception) {
+                    Toast.makeText(this@MainActivity, e.message ?: getString(R.string.err_update_item, ""), Toast.LENGTH_LONG).show()
+                }
+                if (route == "recipe_detail") show("recipe_detail", false)
             }
         }
 
@@ -975,8 +999,14 @@ class MainActivity : ComponentActivity() {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        val r = selectedRecipe
+        val r = selectedRecipe ?: run { show("home", false); return }
         var index = 0
+
+        if (r.steps.isEmpty()) {
+            text(c, getString(R.string.no_steps), 15, grey, center = true, top = 24)
+            outline(c, getString(R.string.bake_exit), 16) { onBackPressedDispatcher.onBackPressed() }
+            return
+        }
 
         // Timer variables
         var countDownTimer: android.os.CountDownTimer? = null
@@ -1057,6 +1087,14 @@ class MainActivity : ComponentActivity() {
             0, dp(52), 1f
         ).apply {
             marginStart = dp(4)
+        }
+
+        // Called whenever Bake Mode is left (exit, system back, tab change, activity destroyed).
+        bakeCleanup = {
+            countDownTimer?.cancel()
+            countDownTimer = null
+            isTimerRunning = false
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         }
 
         // Display the countdown
@@ -1223,11 +1261,8 @@ class MainActivity : ComponentActivity() {
 
             } else {
 
-                window.clearFlags(
-                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                )
-
-                show("recipe_detail")
+                // Go back to the recipe instead of stacking another entry on the history.
+                if (history.isNotEmpty()) show(history.removeLast(), false) else show("recipe_detail", false)
             }
         }
 

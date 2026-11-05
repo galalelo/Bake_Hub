@@ -148,4 +148,6 @@
     <string name="notif_new_recipe_body">%1$s de %2$s</string>
     <string name="notif_timer_title">Temporizador terminado</string>
     <string name="notif_timer_body">%1$s: ¡es hora del siguiente paso!</string>
+    <string name="err_recipe_incomplete">Añade al menos un ingrediente y un paso.</string>
+    <string name="no_steps">Esta receta no tiene pasos.</string>
 </resources>

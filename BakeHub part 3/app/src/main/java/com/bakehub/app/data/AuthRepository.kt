@@ -5,6 +5,8 @@ import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.NoCredentialException
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.bakehub.app.data.firebase.FirebaseClients
 import com.bakehub.app.notifications.AppNotifications
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
@@ -65,8 +67,18 @@ object AuthRepository {
             .setServerClientId(serverClientId)
             .setAutoSelectEnabled(false)
             .build()
+        val manager = CredentialManager.create(activityContext)
         val request = GetCredentialRequest.Builder().addCredentialOption(option).build()
-        val result = CredentialManager.create(activityContext).getCredential(activityContext, request)
+        val result = try {
+            manager.getCredential(activityContext, request)
+        } catch (e: NoCredentialException) {
+            // No account was offered by the bottom sheet. Fall back to the full "Sign in with
+            // Google" flow, which can also pick or add an account instead of failing outright.
+            val fallback = GetCredentialRequest.Builder()
+                .addCredentialOption(GetSignInWithGoogleOption.Builder(serverClientId).build())
+                .build()
+            manager.getCredential(activityContext, fallback)
+        }
 
         val credential = result.credential
         if (credential is CustomCredential &&
@@ -93,6 +105,7 @@ object AuthRepository {
         AppNotifications.onLogout()
         auth.signOut()
         UserRepository.reset()
+        RecipeRepository.stopListening()
         if (context != null) {
             runCatching {
                 CredentialManager.create(context).clearCredentialState(ClearCredentialStateRequest())
@@ -126,6 +139,7 @@ object AuthRepository {
 
         AppNotifications.onLogout()
         UserRepository.reset()
+        RecipeRepository.stopListening()
 
         // User-published recipes (best effort - never block account deletion on this).
         runCatching {

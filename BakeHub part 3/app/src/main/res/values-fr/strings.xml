@@ -148,4 +148,6 @@
     <string name="notif_new_recipe_body">%1$s par %2$s</string>
     <string name="notif_timer_title">Minuteur terminé</string>
     <string name="notif_timer_body">%1$s : passez à l\'étape suivante !</string>
+    <string name="err_recipe_incomplete">Ajoutez au moins un ingrédient et une étape.</string>
+    <string name="no_steps">Cette recette n\'a aucune étape.</string>
 </resources>
