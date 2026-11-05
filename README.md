@@ -188,13 +188,13 @@ Test instructions and workflow files describe what is configured to run; check t
 
 ### BakeHub 1.0.0 — prototype to current project version
 
-The repository’s earlier prototype notes describe a Jetpack Compose interface, email/password Firebase authentication, Firestore-backed profiles and recipes, and recipe saving/publishing. The grocery list and some gamification data were still mock/static at that stage; external recipe search, recipe-image loading and several service integrations were not yet part of the described implementation.
+The repository’s earlier prototype notes describe email/password Firebase authentication, Firestore-backed profiles and recipes, and recipe saving/publishing. The grocery list and some gamification data were still mock/static at that stage; external recipe search, recipe-image loading and several service integrations were not yet part of the described implementation.
 
 This version extends that baseline as follows:
 
 | Area | Prototype baseline | Added or upgraded in this version |
 |---|---|---|
-| **Android interface** | Jetpack Compose screen implementation. | Migrated to Kotlin/XML-based Android screens for onboarding, authentication, home, search, recipe box/detail, profile, grocery, settings, recipe creation and Bake Mode. |
+| **Android interface** | Prototype-stage Android screens. | Builds out the interface with Kotlin/XML screens for onboarding, authentication, home, search, recipe box/detail, profile, grocery, settings, recipe creation and Bake Mode. |
 | **Recipe discovery** | Firestore recipes and saved/published recipe flow. | Adds TheMealDB-backed discovery and search, external recipe/image mapping, source attribution and optional server-side Spoonacular search. |
 | **Authentication** | Firebase email/password sign-up and login. | Adds Google single sign-on via Android Credential Manager and Firebase Auth; first-time Google users receive a Firestore profile. |
 | **Grocery planning** | Static/mock grocery list. | Adds a per-user Firestore grocery list with add, edit, check-off, delete, share and cloud synchronization. |
